@@ -19,23 +19,41 @@
         您購物車裡的食物：<br/>
         <table style="width: 90%;" border="1">
             <thead>
-                <th>項目</th>
-            </thead>
-            <tbody>
-                <!--
-                question 1 (30%)
-                從 session 取得 foodList 這個 attribute 
-                將 foodList 裏面的每個字串列成 table 的一列
-                例如
-                <tr><td>烤雞腿</td></tr>
-                -->
+            <th>項目</th>
+        </thead>
+        <tbody>
+            <!--
+            question 1 (30%)
+            從 session 取得 foodList 這個 attribute 
+            將 foodList 裏面的每個字串列成 table 的一列
+            例如
+            <tr><td>烤雞腿</td></tr>
+            -->
+            <%
+                ArrayList list = (ArrayList) session.getAttribute("foodList");
                 
-            </tbody>
-        </table>
-        <a href="checkout.jsp"><button>Checkout</button></a><br/>
-        <!--
-        question 2 (10%)
-        引用 /WEB-INF/footer.jsp
-        -->
+      
+                for (int i = 0; list != null && i < list.size(); i++) {
+                    String t = (String) list.get(i);
+                    if (t==null){
+                        out.println(" ");
+                    }else{
+                        out.println("<tr><td>" + t + "</td></tr>");
+                    }
+                }
+               
+  
+                    
+            %>
+
+
+        </tbody>
+    </table>
+    <a href="checkout.jsp"><button>Checkout</button></a><br/>
+    <!--
+    question 2 (10%)
+    引用 /WEB-INF/footer.jsp
+    -->
+    <jsp:include page="/WEB-INF/footer.jsp"/>
     </body>
 </html>

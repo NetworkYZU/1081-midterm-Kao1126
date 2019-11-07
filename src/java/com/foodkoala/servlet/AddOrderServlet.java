@@ -34,6 +34,7 @@ public class AddOrderServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
+        
         /*
         question 5 (30%)
         取得 session 物件，接收 user 傳來的 food 參數，
@@ -42,6 +43,19 @@ public class AddOrderServlet extends HttpServlet {
         question 6 (10%)
         最後外轉址到 list.jsp
         */
+        
+        String food = request.getParameter("food");
+        HttpSession session = request.getSession();
+        session.setAttribute("food", food);
+        ArrayList foodList = (ArrayList)session.getAttribute("foodList");
+        if(foodList==null){
+            foodList = new ArrayList();
+            session.setAttribute("foodList", foodList);
+        }
+        
+        foodList.add(food);
+        
+        response.sendRedirect("list.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
